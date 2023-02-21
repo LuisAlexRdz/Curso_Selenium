@@ -9,5 +9,9 @@ print("Es a menor que b: "+ str(a<=b))
 print("Es a mayor que b: "+ str(a>=b))
 print("Son diferentes: "+ str(a!=b))
 
-#Operadores de logicos
-print("sia e menor que b y a es menor que c: "+str(a<b and a<c))
+#Operadores logicos
+#comparacion Y
+print("si A e menor que B y A es menor que C: "+str(a<b and a<c))
+
+#Comparacion Ó
+print("si A e menor que B ó A es menor que C: "+str(a<b or a<c))
