@@ -25,5 +25,6 @@ time.sleep(2)"""
 
 driver.find_element(By.XPATH,value="//button[contains(@id,'submit')]").click()
 time.sleep(2)
+print(driver.title)
 
 driver.close()
