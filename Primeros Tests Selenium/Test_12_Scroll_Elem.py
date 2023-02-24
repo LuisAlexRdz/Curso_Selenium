@@ -11,7 +11,7 @@ from selenium.common.exceptions import TimeoutException
 #Se declara variable para el driver y se localiza el path driver
 driver=webdriver.Chrome(executable_path="Drivers/chromedriver.exe")
 #Se realiza la conexion a la pagina
-driver.get("https://testpages.herokuapp.com/styled/file-upload-test.html")
+driver.get("https://pixabay.com/es/")
 # se maximiza la pagina
 driver.maximize_window()
 #espera el tiempo definido para esperar a que localice los objetos
@@ -21,13 +21,12 @@ t=3
 
 try:
     #Validar ComboBox
-    buscar = WebDriverWait(driver, 5).until(EC.visibility_of_element_located((By.XPATH, "//input[contains(@id,'fileinput')]")))
-    buscar = driver.find_element(By.XPATH, "//input[contains(@id,'fileinput')]")
-    buscar.send_keys("C://Users//DELL//OneDrive//Documentos//Alex Rdz//Curso_Selenium//Imagenes//Demo1.jpg")
+    buscar = WebDriverWait(driver, 5).until(EC.visibility_of_element_located((By.XPATH, "//span[@class='label--Ngqjq'][contains(.,'Descubre más')]")))
+    buscar = driver.find_element(By.XPATH, "//span[@class='label--Ngqjq'][contains(.,'Descubre más')]")
+    ir = driver.execute_script("arguments[0].scrollIntoView();",buscar)
     time.sleep(t)
-    driver.find_element(By.XPATH, "//input[contains(@id,'itsanimage')]").click()
-    driver.find_element(By.XPATH, "//input[contains(@value,'Upload')]").click()
-    time.sleep(t)
+
+    #driver.execute_script("windows.scrollTo(0,800)")
 
 except TimeoutException as ex:
     print(ex.msg)

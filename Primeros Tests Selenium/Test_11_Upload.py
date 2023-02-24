@@ -27,7 +27,6 @@ try:
     time.sleep(t)
     driver.find_element(By.XPATH, "//input[contains(@id,'itsanimage')]").click()
     driver.find_element(By.XPATH, "//input[contains(@value,'Upload')]").click()
-    time.sleep(t)
 
 except TimeoutException as ex:
     print(ex.msg)
