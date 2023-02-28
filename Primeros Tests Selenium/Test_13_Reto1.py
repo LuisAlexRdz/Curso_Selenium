@@ -17,7 +17,7 @@ driver.maximize_window()
 #espera el tiempo definido para esperar a que localice los objetos
 driver.implicitly_wait(10)
 
-t=5
+t=2
 
 driver.find_element(By.XPATH,"//input[contains(@name,'firstname')]").send_keys("Alex" + Keys.TAB + "Rdz")
 genero = WebDriverWait(driver, 3).until(EC.visibility_of_element_located((By.XPATH, "//input[contains(@value,'Male')]")))
