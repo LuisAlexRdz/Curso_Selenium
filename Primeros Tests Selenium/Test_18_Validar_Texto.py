@@ -8,26 +8,29 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import Select
 from selenium.common.exceptions import TimeoutException
 
-t=2
-#Se declara variable para el driver y se localiza el path driver
+t=3
+#Se declara variable para el driver y se localiza el path driver https://nxtgenaiacademy.com/demo-site/
 driver=webdriver.Chrome(executable_path="Drivers/chromedriver.exe")
 #Se realiza la conexion a la pagina
-driver.get("https://demoqa.com/")
+driver.get("https://accounts.lambdatest.com/register")
 # se maximiza la pagina
 driver.maximize_window()
 #espera el tiempo definido para esperar a que localice los objetos
 driver.implicitly_wait(10)
 
-titulo = driver.find_element(By.XPATH, "//img[@src='/images/Toolsqa.jpg']")
-print(titulo.is_displayed())
-bt1 = driver.find_element(By.XPATH, "//body/div[@id='app']/div[1]/div[1]/div[2]/div[1]/div[1]")
+btn = driver.find_element(By.XPATH, "//button[contains(@data-testid,'signup-button')]").click()
+full_name = driver.find_element(By.XPATH, "//p[@data-testid='errors-name'][contains(.,'Please enter your name')]")
+name = full_name.text
 
-if (titulo.is_displayed()==True):
-    print("Existe la imagen")
-    bt1.click()
+print("El valor del error es: " + name)
+
+if (name=="Please enter your name"):
+    #print("Falta el nombre")
+    cn = driver.find_element(By.XPATH, "//input[contains(@data-testid,'name')]")
+    cn.send_keys("Alex Rdz")
     time.sleep(t)
 else:
-    print("No existe la imagen")
+    print("Nombre correcto")
 
 time.sleep(t)
 driver.close()

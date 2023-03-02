@@ -12,22 +12,19 @@ t=2
 #Se declara variable para el driver y se localiza el path driver
 driver=webdriver.Chrome(executable_path="Drivers/chromedriver.exe")
 #Se realiza la conexion a la pagina
-driver.get("https://demoqa.com/")
+driver.get("https://demoqa.com/text-box")
 # se maximiza la pagina
 driver.maximize_window()
 #espera el tiempo definido para esperar a que localice los objetos
 driver.implicitly_wait(10)
 
-titulo = driver.find_element(By.XPATH, "//img[@src='/images/Toolsqa.jpg']")
-print(titulo.is_displayed())
-bt1 = driver.find_element(By.XPATH, "//body/div[@id='app']/div[1]/div[1]/div[2]/div[1]/div[1]")
+btn = driver.find_element(By.XPATH, "//button[contains(@id,'submit')]")
+print(btn.is_enabled())
 
-if (titulo.is_displayed()==True):
-    print("Existe la imagen")
-    bt1.click()
-    time.sleep(t)
+if (btn.is_enabled()==True):
+    print("Puedes dar click")
 else:
-    print("No existe la imagen")
+    print("No puedes dar click")
 
 time.sleep(t)
 driver.close()
