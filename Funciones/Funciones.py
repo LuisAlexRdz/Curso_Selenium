@@ -40,7 +40,7 @@ class Funciones_Globales():
         except TimeoutException as ex:
             print(ex.msg)
             print("No se encontro el elemento " + xpath)
-            return t
+
 
     def Texto_ID_Valida(self, ID,texto,tiempo):
         try:
@@ -55,7 +55,37 @@ class Funciones_Globales():
         except TimeoutException as ex:
             print(ex.msg)
             print("No se encontro el elemento " + ID)
-            return t
+
+
+    def Texto_Mixto(self, tipo, selector, texto, tiempo):
+        if (tipo=="xpath"):
+            try:
+                val = WebDriverWait(self.driver, 5).until(EC.visibility_of_element_located((By.XPATH, selector)))
+                val = self.driver.execute_script("arguments[0].scrollIntoView();", val)
+                val = self.driver.find_element(By.XPATH, selector)
+                val.clear()
+                val.send_keys(texto)
+                print("Escribiendo en el campo {} el texto {} ".format(selector, texto))
+                t = time.sleep(tiempo)
+                return t
+            except TimeoutException as ex:
+                print(ex.msg)
+                print("No se encontro el elemento " + selector)
+                return t
+        if (tipo=="id"):
+            try:
+                val = WebDriverWait(self.driver, 5).until(EC.visibility_of_element_located((By.ID, selector)))
+                val = self.driver.execute_script("arguments[0].scrollIntoView();", val)
+                val = self.driver.find_element(By.ID, selector)
+                val.clear()
+                val.send_keys(texto)
+                print("Escribiendo en el campo {} el texto {} ".format(selector, texto))
+                t = time.sleep(tiempo)
+                return t
+            except TimeoutException as ex:
+                print(ex.msg)
+                print("No se encontro el elemento " + selector)
+
 
 #Funcion Click
     def Click_Xpath_Valida(self, xpath, tiempo):
@@ -70,7 +100,7 @@ class Funciones_Globales():
         except TimeoutException as ex:
             print(ex.msg)
             print("No se encontro el elemento " + xpath)
-            return t
+
 
     def Click_ID_Valida(self, ID, tiempo):
         try:
@@ -84,7 +114,7 @@ class Funciones_Globales():
         except TimeoutException as ex:
             print(ex.msg)
             print("No se encontro el elemento " + ID)
-            return t
+
 
 #Funcion Select
     def Select_Xpath_Type(self, xpath,tipo,dato, tiempo):
@@ -105,7 +135,7 @@ class Funciones_Globales():
         except TimeoutException as ex:
             print(ex.msg)
             print("No se encontro el elemento " + xpath)
-            return t
+
 
     def Select_ID_Type(self, ID,tipo,dato, tiempo):
         try:
@@ -125,7 +155,7 @@ class Funciones_Globales():
         except TimeoutException as ex:
             print(ex.msg)
             print("No se encontro el elemento " + ID)
-            return t
+
 
 #Funcion Cargar Imagen
     def Upload_Xpath(self, xpath, ruta, tiempo):
@@ -140,7 +170,7 @@ class Funciones_Globales():
         except TimeoutException as ex:
             print(ex.msg)
             print("No se encontro la imagen " + xpath)
-            return t
+
 
     def Upload_ID(self, ID, ruta, tiempo):
         try:
@@ -154,7 +184,7 @@ class Funciones_Globales():
         except TimeoutException as ex:
             print(ex.msg)
             print("No se encontro la imagen " + ID)
-            return t
+
 
 #Funcion Radio y Check
     def Check_Xpath(self, xpath,  tiempo):
@@ -169,7 +199,7 @@ class Funciones_Globales():
         except TimeoutException as ex:
             print(ex.msg)
             print("No se encontro el elemento " + xpath)
-            return t
+
 
     def Check_ID(self, id,  tiempo):
         try:
@@ -183,7 +213,7 @@ class Funciones_Globales():
         except TimeoutException as ex:
             print(ex.msg)
             print("No se encontro el elemento " + id)
-            return t
+
 
     def Check_Xpath_Multiple(self, tiempo, *args):
         try:

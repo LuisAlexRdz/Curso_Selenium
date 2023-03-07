@@ -8,22 +8,21 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import Select
 from selenium.common.exceptions import TimeoutException
-from Funciones.Funciones import Funciones_Globales
+from Funciones.Funciones2 import Funciones_Globales2
+tg=1
 
 class base_test(unittest.TestCase):
 
     def setUp(self):
         self.driver = webdriver.Chrome(executable_path="Drivers/chromedriver.exe")
-        self.driver.maximize_window()
-
 
     def test1(self):
         driver = self.driver
-        f= Funciones_Globales(driver)
-        f.Navegar("https://www.saucedemo.com/", .5)
-        f.Texto_Xpath_Valida("//input[contains(@id,'user-name')]", "LuisAlexRdz", 1)
-        f.Texto_Xpath_Valida("//input[contains(@id,'password')]", "Alex1983", 1)
-        f.Click_Xpath_Valida("//input[contains(@id,'login-button')]",5)
+        f= Funciones_Globales2(driver)
+        f.Navegar("https://www.saucedemo.com/", tg)
+        f.Texto_Mixto("xpath","//input[contains(@id,'user-name')]", "LuisAlexRdz",tg)
+        f.Texto_Mixto("id","password", "Alex1983", tg)
+        f.Click_Mixto("xpath","//input[contains(@id,'login-button')]",tg)
         f.Salida()
 
 
