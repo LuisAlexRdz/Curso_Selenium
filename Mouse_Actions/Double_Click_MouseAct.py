@@ -11,22 +11,20 @@ from selenium.common.exceptions import TimeoutException
 from Funciones.Funciones import Funciones_Globales
 
 
-tg = 1
-class base_test2(unittest.TestCase):
+t=2
+class base_test(unittest.TestCase):
 
     def setUp(self):
         self.driver = webdriver.Chrome(executable_path="Drivers/chromedriver.exe")
+        #self.driver.maximize_window()
 
 
     def test1(self):
         driver = self.driver
-        f=Funciones_Globales(driver)
-        f.Navegar("https://testpages.herokuapp.com/styled/file-upload-test.html", tg)
-        f.Upload_ID("fileinput","C://Users//PRIDE OMEGA//Documents//Alex Rdz//Curso_Selenium//Curso_Selenium//Imagenes//Demo1.jpg", tg)
-        f.Click_Mixto("//input[contains(@id,'itsanimage')]",tg)
-        f.Click_Mixto("//input[contains(@value,'Upload')]", tg)
-        f.Salida()
+        f= Funciones_Globales(driver)
+        f.Navegar("https://demoqa.com/buttons",t)
 
+        f.Mouse_Double("id","doubleClickBtn")
 
     def tearDown(self):
         driver = self.driver

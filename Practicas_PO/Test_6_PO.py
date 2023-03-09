@@ -8,7 +8,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import Select
 from selenium.common.exceptions import TimeoutException
-from Funciones.Funciones2 import Funciones_Globales2
+from Funciones.Funciones import Funciones_Globales
 tg=1
 
 class base_test(unittest.TestCase):
@@ -18,7 +18,7 @@ class base_test(unittest.TestCase):
 
     def test1(self):
         driver = self.driver
-        f= Funciones_Globales2(driver)
+        f= Funciones_Globales(driver)
         f.Navegar("https://demoqa.com/text-box", tg)
         f.Texto_Mixto("xpath", "//input[contains(@id,'userName')]", "Luis Alex Rdz", tg)
         f.Texto_Mixto("userEmail", "password", "Alex1983", tg)

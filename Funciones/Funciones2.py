@@ -27,62 +27,65 @@ class Funciones_Globales2():
         return t
 
 #Funcion Valida Texto
-    def Texto_Mixto(self, tipo, selector, texto, tiempo):
-        if (tipo=="xpath"):
-            try:
-                val = WebDriverWait(self.driver, 5).until(EC.visibility_of_element_located((By.XPATH, selector)))
-                val = self.driver.execute_script("arguments[0].scrollIntoView();", val)
-                val = self.driver.find_element(By.XPATH, selector)
-                val.clear()
-                val.send_keys(texto)
-                print("Escribiendo en el campo {} el texto {} ".format(selector, texto))
-                t = time.sleep(tiempo)
-                return t
-            except TimeoutException as ex:
-                print(ex.msg)
-                print("No se encontro el elemento " + selector)
-                return t
-        elif (tipo=="id"):
-            try:
-                val = WebDriverWait(self.driver, 5).until(EC.visibility_of_element_located((By.ID, selector)))
-                val = self.driver.execute_script("arguments[0].scrollIntoView();", val)
-                val = self.driver.find_element(By.ID, selector)
-                val.clear()
-                val.send_keys(texto)
-                print("Escribiendo en el campo {} el texto {} ".format(selector, texto))
-                t = time.sleep(tiempo)
-                return t
-            except TimeoutException as ex:
-                print(ex.msg)
-                print("No se encontro el elemento " + selector)
+    def Texto_Xpath_Valida(self, xpath, texto, tiempo):
+        try:
+            val = WebDriverWait(self.driver, 5).until(EC.visibility_of_element_located((By.XPATH, xpath)))
+            val = self.driver.execute_script("arguments[0].scrollIntoView();", val)
+            val = self.driver.find_element(By.XPATH, xpath)
+            val.clear()
+            val.send_keys(texto)
+            print("Escribiendo en el campo {} el texto {} ".format(xpath, texto))
+            t = time.sleep(tiempo)
+            return t
+        except TimeoutException as ex:
+            print(ex.msg)
+            print("No se encontro el elemento " + xpath)
+
+
+    def Texto_ID_Valida(self, ID,texto,tiempo):
+        try:
+            val = WebDriverWait(self.driver, 5).until(EC.visibility_of_element_located((By.ID, ID)))
+            val = self.driver.execute_script("arguments[0].scrollIntoView();", val)
+            val = self. driver.find_element(By.ID, ID)
+            val.clear()
+            val.send_keys(texto)
+            print("Escribiendo en el campo {} el texto {} ".format(ID, texto))
+            t = time.sleep(tiempo)
+            return  t
+        except TimeoutException as ex:
+            print(ex.msg)
+            print("No se encontro el elemento " + ID)
 
 
 #Funcion Click
-    def Click_Mixto(self, tipo,selector, tiempo):
-        if (tipo == "xpath"):
-            try:
-                val = WebDriverWait(self.driver, 5).until(EC.visibility_of_element_located((By.XPATH, selector)))
-                val = self.driver.execute_script("arguments[0].scrollIntoView();", val)
-                val = self.driver.find_element(By.XPATH, selector)
-                val.click()
-                print("Damos click en boton {} ".format(selector))
-                t = time.sleep(tiempo)
-                return t
-            except TimeoutException as ex:
-                print(ex.msg)
-                print("No se encontro el elemento " + selector)
-        elif (tipo == "id"):
-            try:
-                val = WebDriverWait(self.driver, 5).until(EC.visibility_of_element_located((By.ID, selector)))
-                val = self.driver.execute_script("arguments[0].scrollIntoView();", val)
-                val = self.driver.find_element(By.ID, selector)
-                val.click()
-                print("Damos click en boton {} ".format(selector))
-                t = time.sleep(tiempo)
-                return t
-            except TimeoutException as ex:
-                print(ex.msg)
-                print("No se encontro el elemento " + selector)
-
     def Salida(self):
         print("Se termina la prueba exitosamente")
+
+
+    def Click_Xpath_Valida(self, xpath, tiempo):
+        try:
+            val = WebDriverWait(self.driver, 5).until(EC.visibility_of_element_located((By.XPATH, xpath)))
+            val = self.driver.execute_script("arguments[0].scrollIntoView();", val)
+            val = self.driver.find_element(By.XPATH, xpath)
+            val.click()
+            print("Damos click en boton {} ".format(xpath))
+            t = time.sleep(tiempo)
+            return t
+        except TimeoutException as ex:
+            print(ex.msg)
+            print("No se encontro el elemento " + xpath)
+
+
+    def Click_ID_Valida(self, ID, tiempo):
+        try:
+            val = WebDriverWait(self.driver, 5).until(EC.visibility_of_element_located((By.ID, ID)))
+            val = self.driver.execute_script("arguments[0].scrollIntoView();", val)
+            val = self.driver.find_element(By.ID, ID)
+            val.click()
+            print("Damos click en boton {} ".format(ID))
+            t = time.sleep(tiempo)
+            return t
+        except TimeoutException as ex:
+            print(ex.msg)
+            print("No se encontro el elemento " + ID)
+
