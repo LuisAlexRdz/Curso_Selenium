@@ -261,5 +261,87 @@ class Funciones_Globales():
                 print(ex.msg)
                 print("No se encontro el elemento " + selector)
 
+#Funcion Drag and Drop
+    def Mouse_Drag_Drop(self, tipo, selector, destino, tiempo=2):
+        if (tipo=="xpath"):
+            try:
+                val = self.SelElXp(selector)
+                val2 = self.SelElXp(destino)
+                action = ActionChains(self.driver)
+                action.drag_and_drop(val, val2).perform()
+                print("Se solto el elemento {} ".format(selector))
+                t = time.sleep(tiempo)
+                return t
+            except TimeoutException as ex:
+                print(ex.msg)
+                print("No se encontro el elemento " + selector)
+                return t
+        if (tipo=="id"):
+            try:
+                val = self.SelElId(selector)
+                val2 = self.SelElId(destino)
+                action = ActionChains(self.driver)
+                action.drag_and_drop(val, val2).perform()
+                print("Se solto el elemento {} ".format(selector))
+                t = time.sleep(tiempo)
+                return t
+            except TimeoutException as ex:
+                print(ex.msg)
+                print("No se encontro el elemento " + selector)
+
+    def Mouse_Drag_DropXY(self, tipo, selector, x,y, tiempo=2):
+        if (tipo=="xpath"):
+            try:
+                self.driver.switch_to.frame(0)
+                val = self.SelElXp(selector)
+                action = ActionChains(self.driver)
+                action.drag_and_drop_by_offset(val, x,y).perform()
+                print("Se movio el elemento {} ".format(selector))
+                t = time.sleep(tiempo)
+                return t
+            except TimeoutException as ex:
+                print(ex.msg)
+                print("No se encontro el elemento " + selector)
+                return t
+        if (tipo=="id"):
+            try:
+                #self.driver.switch_to.frame(0)
+                val = self.SelElId(selector)
+                action = ActionChains(self.driver)
+                action.drag_and_drop_by_offset(val, x,y).perform()
+                print("Se movio el elemento {} ".format(selector))
+                t = time.sleep(tiempo)
+                return t
+            except TimeoutException as ex:
+                print(ex.msg)
+                print("No se encontro el elemento " + selector)
+
+    def Click_XY(self, tipo, selector, x,y, tiempo=2):
+        if (tipo=="xpath"):
+            try:
+                #self.driver.switch_to.frame(0)
+                val = self.SelElXp(selector)
+                action = ActionChains(self.driver)
+                action.move_to_element_with_offset(val, x,y).click().perform()
+                print("Click al elemento {} coordenada {}, {}".format(selector,x,y))
+                t = time.sleep(tiempo)
+                return t
+            except TimeoutException as ex:
+                print(ex.msg)
+                print("No se encontro el elemento " + selector)
+                return t
+        if (tipo=="id"):
+            try:
+                self.driver.switch_to.frame(0)
+                val = self.SelElId(selector)
+                action = ActionChains(self.driver)
+                action.move_to_element_with_offset(val, x,y).click().perform()
+                print("Click al elemento {} coordenada {}, {}".format(selector,x,y))
+                t = time.sleep(tiempo)
+                return t
+            except TimeoutException as ex:
+                print(ex.msg)
+                print("No se encontro el elemento " + selector)
+
     def Salida(self):
         print("Se termina la prueba exitosamente")
