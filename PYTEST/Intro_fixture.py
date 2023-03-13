@@ -12,13 +12,20 @@ from selenium.webdriver.firefox.options import Options
 from Page_Login import Funciones_Login
 from  selenium.webdriver import ActionChains
 
-t=.3
-def test_login1():
-    driver = webdriver.Chrome(executable_path="Drivers/chromedriver.exe")
-    fl = Funciones_Login(driver)
-    fl.L1("juan@yourstore.com","admin","No customer account found",t)
-    fl.L2("","admin","Please enter your email",t)
-    fl.L3("Alex","admin","Wrong email",t)
-    fl.L4("admin@yourstore.com","","The credentials provided are incorrect",t)
-    fl.L5("admin@yourstore.com","admin","Dashboard",t)
+t=1
 
+def setup_function(function):
+    print("Esto va al inicio de cada test")
+
+def teardown_function(function):
+    print("Esto va al final de cada test")
+
+
+def test_uno():
+    print("Test uno")
+
+def test_dos():
+    print("Test dos")
+
+def test_tres():
+    print("Test tres")

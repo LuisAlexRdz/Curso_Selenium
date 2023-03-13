@@ -8,6 +8,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import Select
 from selenium.common.exceptions import TimeoutException
+from selenium.webdriver.firefox.options import Options
 from  selenium.webdriver import ActionChains
 
 class Funciones_Globales():
