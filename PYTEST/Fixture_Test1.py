@@ -47,7 +47,10 @@ def test_dos():
     f.Click_Mixto("xpath","//span[@class='tox-mbtn__select-label'][contains(.,'File')]",t)
     f.Click_Mixto("xpath","//span[@class='tox-mbtn__select-label'][contains(.,'File')]",t)
     driver.switch_to.frame(0)
-    f.Texto_Mixto("xpath","//body", "Monitor Curvo 27 pulgadas, sin biseles, FHD 1920x1080, Game Mode, FreeSync, Eco Saving Plus, Flicker Free, 1x HDMI 1.4, 1x D-sub, 4ms(GTG), Dark Blue Gray (LC27R500FHLXZX)", t)
+    #f.Texto_Mixto("xpath","//body", "Monitor Curvo 27 pulgadas, sin biseles, FHD 1920x1080, Game Mode, FreeSync, Eco Saving Plus, Flicker Free, 1x HDMI 1.4, 1x D-sub, 4ms(GTG), Dark Blue Gray (LC27R500FHLXZX)", t)
+    campo=driver.find_element(By.XPATH,"//body")
+    campo.send_keys("Monitor Curvo 27 pulgadas, sin biseles, FHD 1920x1080, Game Mode, FreeSync, Eco Saving Plus, Flicker Free, 1x HDMI 1.4, 1x D-sub, 4ms(GTG), Dark Blue Gray (LC27R500FHLXZX)"+ Keys.TAB+"MON_PHL")
+    #f.Texto_Mixto("xpath","//input[contains(@id,'Sku')]","MON_PHL",t)
 
 
 
