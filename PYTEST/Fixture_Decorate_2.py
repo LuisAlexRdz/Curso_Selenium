@@ -12,7 +12,7 @@ from selenium.webdriver.firefox.options import Options
 from Funciones import Funciones_Globales
 from Page_Login import Funciones_Login
 from  selenium.webdriver import ActionChains
-t=1
+t=.5
 f=""
 driver=""
 
@@ -25,7 +25,7 @@ def setup_login_uno():
     f = Funciones_Globales(driver)
     f.Texto_Mixto("id", "Email", "admin@yourstore.com", t)
     f.Texto_Mixto("id", "Password", "admin", t)
-    f.Click_Mixto("xpath", "//button[@type='submit'][contains(.,'Log in')]", 5)
+    f.Click_Mixto("xpath", "//button[@type='submit'][contains(.,'Log in')]", 3)
     print("Entrando al sistema")
     yield
     print("Saliendo del login uno")
@@ -41,7 +41,7 @@ def setup_login_dos():
     f = Funciones_Globales(driver)
     f.Texto_Mixto("id", "user", "LuisAlexRdz", t)
     f.Texto_Mixto("id", "password", "Alex1983", t)
-    f.Click_Mixto("xpath", "//button[@type='submit'][contains(.,'LOG IN')]", 5)
+    f.Click_Mixto("xpath", "//button[@type='submit'][contains(.,'LOG IN')]", 3)
     print("Entrando al sistema")
     yield
     print("Saliendo del login dos")
@@ -50,8 +50,33 @@ def setup_login_dos():
 @pytest.mark.usefixtures("setup_login_uno")
 def test_uno():
     print("Entrando al sistema uno")
+    f.Click_Mixto("xpath","(//p[contains(.,'Customers')])[1]",t)
+    f.Click_Mixto("xpath","(//p[contains(.,'Customers')])[2]",t)
+    f.Click_Mixto("xpath","//i[contains(@class,'fas fa-plus-square')]",3)
+    email=driver.find_element(By.ID,"Email")
+    email.send_keys("alex2@mail.com"+Keys.TAB+"Alex123"+Keys.TAB+"Alex2"+Keys.TAB+"Rdz2")
+    time.sleep(2)
+    f.Check_Xpath("//input[@id='Gender_Male']",t)
+    f.Texto_Mixto("xpath","//input[contains(@id,'DateOfBirth')]","6/16/1983",t)
+    f.Texto_Mixto("id","Company","Hexaware",t)
+    f.Check_ID("IsTaxExempt",t)
+    f.Click_Mixto("xpath","(//div[@role='listbox'])[1]",t)
+    f.Click_Mixto("xpath","//li[contains(.,'Your store name')]",t)
+    f.Click_Mixto("xpath", "//input[contains(@aria-describedby,'SelectedCustomerRoleIds_taglist')]", t)
+    f.Click_Mixto("xpath", "//li[contains(.,'Administrators')]", t)
+    f.Click_Mixto("xpath","(//span[contains(@title,'delete')])[2]",t)
+    f.Click_Mixto("xpath", "//input[contains(@aria-describedby,'SelectedCustomerRoleIds_taglist')]", t)
+    f.Click_Mixto("xpath", "//li[@id='53a79c5a-e428-48d4-9c8a-8a87491e526e']", t)
+    f.Select_Xpath_Type("//select[@id='VendorId']","index","2",t)
+    f.Texto_Mixto("xpath","//textarea[@id='AdminComment']","Texto Largo",2)
+    f.Click_Mixto("xpath","//textarea[@id='AdminComment']",3)
+
+
+
 
 @pytest.mark.usefixtures("setup_login_dos")
 def test_dos():
     print("Entrando al sistema dos")
+    f = Funciones_Globales(driver)
+    f.Click_Mixto("xpath","//textarea[contains(@id,'ShortDescription')]",3)
 
