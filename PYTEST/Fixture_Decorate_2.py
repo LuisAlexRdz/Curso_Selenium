@@ -4,6 +4,7 @@ import pytest
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
+from selenium.webdriver.common.alert import Alert
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import Select
@@ -12,7 +13,7 @@ from selenium.webdriver.firefox.options import Options
 from Funciones import Funciones_Globales
 from Page_Login import Funciones_Login
 from  selenium.webdriver import ActionChains
-t=.5
+t= 1
 f=""
 driver=""
 
@@ -37,7 +38,7 @@ def setup_login_dos():
     global driver, f
     driver = webdriver.Chrome(executable_path='Drivers/chromedriver.exe')
     driver.get("https://test.igniite.io/auth")
-    driver.maximize_window()
+    ##driver.maximize_window()
     f = Funciones_Globales(driver)
     f.Texto_Mixto("id", "user", "LuisAlexRdz", t)
     f.Texto_Mixto("id", "password", "Alex1983", t)
@@ -78,5 +79,17 @@ def test_uno():
 def test_dos():
     print("Entrando al sistema dos")
     f = Funciones_Globales(driver)
-    f.Click_Mixto("xpath","//textarea[contains(@id,'ShortDescription')]",3)
+    f.Click_Mixto("xpath","(//*[local-name()='svg'])[@name='2-configuration']",t)
+    f.Click_Mixto("xpath","(//div[contains(.,'New')])[15]",t)
+    f.Click_Mixto("xpath","//button[@type='button'][contains(.,'New')]",t)
+
+    alert= driver.switch_to.alert()
+    alert.dismiss()
+
+
+
+
+
+
+
 
