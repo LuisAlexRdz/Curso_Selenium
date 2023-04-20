@@ -37,12 +37,13 @@ def setup_login_uno():
 def setup_login_dos():
     global driver, f
     driver = webdriver.Chrome(executable_path='Drivers/chromedriver.exe')
-    driver.get("https://test.igniite.io/auth")
+    driver.get("https://test.igniite.io/")
     ##driver.maximize_window()
     f = Funciones_Globales(driver)
+    f.Click_Mixto("xpath","(//button[contains(.,'GET STARTED')])[2]",t)
     f.Texto_Mixto("id", "user", "LuisAlexRdz", t)
     f.Texto_Mixto("id", "password", "Alex1983", t)
-    f.Click_Mixto("xpath", "//button[@type='submit'][contains(.,'LOG IN')]", 3)
+    f.Click_Mixto("xpath", "//button[@type='submit'][contains(.,'LOGIN')]", 3)
     print("Entrando al sistema")
     yield
     print("Saliendo del login dos")
@@ -78,13 +79,8 @@ def test_uno():
 @pytest.mark.usefixtures("setup_login_dos")
 def test_dos():
     print("Entrando al sistema dos")
-    f = Funciones_Globales(driver)
-    f.Click_Mixto("xpath","(//*[local-name()='svg'])[@name='2-configuration']",t)
-    f.Click_Mixto("xpath","(//div[contains(.,'New')])[15]",t)
-    f.Click_Mixto("xpath","//button[@type='button'][contains(.,'New')]",t)
+    time.sleep(5)
 
-    alert= driver.switch_to.alert()
-    alert.dismiss()
 
 
 
