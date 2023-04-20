@@ -20,6 +20,7 @@ driver=""
 @pytest.fixture(scope="module")
 def setup_login_uno():
     global driver, f
+    driver.implicitly_wait(20)
     driver = webdriver.Chrome(executable_path='Drivers/chromedriver.exe')
     driver.get("https://admin-demo.nopcommerce.com/login?ReturnUrl=%2Fadmin%2F")
     driver.maximize_window()
@@ -36,6 +37,7 @@ def setup_login_uno():
 @pytest.fixture(scope="module")
 def setup_login_dos():
     global driver, f
+    driver.implicitly_wait(20)
     driver = webdriver.Chrome(executable_path='Drivers/chromedriver.exe')
     driver.get("https://test.igniite.io/")
     ##driver.maximize_window()
