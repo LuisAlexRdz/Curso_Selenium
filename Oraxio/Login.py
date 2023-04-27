@@ -1,8 +1,8 @@
 #importacion de librerias
 import time
 import pytest
+import pyotp
 
-from pyotp import *
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
@@ -12,6 +12,11 @@ from selenium.webdriver.support.ui import Select
 from selenium.common.exceptions import TimeoutException
 
 t=3
+key1 = pyotp.random_base32()
+key = "NeuralNineMySuperSecretKey"
+totp =pyotp.TOTP(key)
+print(totp.now())
+
 
 @pytest.fixture(scope="module")
 def setup_login():
