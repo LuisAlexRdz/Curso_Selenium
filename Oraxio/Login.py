@@ -1,6 +1,8 @@
 #importacion de librerias
 import time
 import pytest
+
+from pyotp import *
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
@@ -12,29 +14,25 @@ from selenium.common.exceptions import TimeoutException
 t=3
 
 @pytest.fixture(scope="module")
-def setup_inicio():
+def setup_login():
     global driver
     #Se declara variable para el driver y se localiza el path driver
     driver = webdriver.Chrome(executable_path="Drivers/chromedriver.exe")
     #Se realiza la conexion a la pagina
-    driver.get("https://test.igniite.io/")
-    driver.execute_script("window.open('');")
-    driver.switch_to.window(driver.window_handles[1])
-    driver.get("https://www.google.com/?client=ms-android-americamovil-mx-revc#sbfbu=0&pi=")
+    driver.get("https://test.igniite.io/login")
     # se maximiza la pagina
     driver.maximize_window()
+    # Se realiza el login a la pagina
+    driver.find_element(By.XPATH,"//input[contains(@id,'user')]").send_keys("LuisAlexRdz")
+    driver.find_element(By.XPATH,"//input[contains(@id,'password')]").send_keys("Alex1983")
+    driver.find_element(By.XPATH,"//button[@type='submit'][contains(.,'LOGIN')]").click()
+    time.sleep(t)
     #espera el tiempo definido para esperar a que localice los objetos
     driver.implicitly_wait(5)
 
-@pytest.mark.usefixtures("setup_inicio")
+@pytest.mark.usefixtures("setup_login")
 def test_uno():
-    driver.switch_to.window(driver.window_handles[1])
-    driver.find_element(By.XPATH,"//a[@class='gb_t'][contains(.,'Gmail')]").click()
-    driver.find_element(By.XPATH,"/html/body/header/div/div/div/a[2]").click()
-    driver.find_element(By.XPATH,"/html/body/div[1]/div[1]/div[2]/div/c-wiz/div/div[2]/div/div[1]/div/form/span/section/div/div/div[1]/div/div[1]/div/div[1]/input").send_keys("rdz.alex83@gmail.com")
-    driver.find_element(By.XPATH,"/html/body/div[1]/div[1]/div[2]/div/c-wiz/div/div[2]/div/div[2]/div/div[1]/div/div/button/span").click()
-    driver.find_element(By.XPATH,"/html/body/div[1]/div[1]/div[2]/div/c-wiz/div/div[2]/div/div[1]/div/form/span/section[2]/div/div/div[1]/div[1]/div/div/div/div/div[1]/div/div[1]/input").send_keys("PEDROZA16061983")
-    driver.find_element(By.XPATH,"/html/body/div[1]/div[1]/div[2]/div/c-wiz/div/div[2]/div/div[2]/div/div[1]/div/div/button/span").click()
+    print("Login correcto")
     time.sleep(t)
 
 
