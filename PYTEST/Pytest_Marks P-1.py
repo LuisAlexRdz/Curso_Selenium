@@ -14,3 +14,27 @@ from Funciones import Funciones_Globales
 from Page_Login import Funciones_Login
 from  selenium.webdriver import ActionChains
 t= 1
+
+def get_Data():
+    return [
+        ("AlexrdzPdr","1234"),
+        ("Alexrdzpdr", "1225434"),
+        ("alexRdzPdr", "77771234")
+    ]
+
+@pytest.mark.parametrize("user,clave", get_Data())
+def test_login(user,clave):
+    global  driver, f
+    driver = webdriver.Chrome(executable_path="Drivers/chromedriver.exe")
+    driver.get("https://test.igniite.io/login")
+    driver.maximize_window()
+    driver.implicitly_wait(20)
+    f = Funciones_Globales(driver)
+    f.Texto_Mixto("xpath","//input[contains(@id,'user')]", user, t)
+    f.Texto_Mixto("xpath","//input[contains(@id,'password')]", clave, t)
+    f.Click_Mixto("xpath","//button[@type='submit'][contains(.,'LOGIN')]",t)
+    print("Entrando al sistema")
+
+def teardown_function():
+    print("Salida del test")
+    driver.close()

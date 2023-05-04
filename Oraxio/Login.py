@@ -43,44 +43,5 @@ def test_uno():
 
 
 
-@pytest.mark.usefixtures("setup_inicio")
-def test_dos(setup_inicio):
-    #Busca boton
-    try:
-        # Valida si existe boton y da click en boton get started
-        buscar = WebDriverWait(driver, 3).until(EC.visibility_of_element_located((By.XPATH, "(//button[@type='button'][contains(.,'GET STARTED')])[2]")))
-        buscar = driver.find_element(By.XPATH, "(//button[@type='button'][contains(.,'GET STARTED')])[2]").click()
-        time.sleep(t)
-    except TimeoutException as ex:
-        print(ex.msg)
-        print("El elemento no esta disponible")
-    # Da clic en opcion SIGN UP
-    driver.find_element(By.XPATH,"//a[contains(.,'Sign up')]").click()
-    time.sleep(t)
-    # Valida que exita el nombre REGISTER
-    pg_name = driver.find_element(By.XPATH, "//*[@id='root']/div/div/div/div[2]/div[1]")
-    name = pg_name.text
-    print(name)
-
-    if (name=='REGISTER'):
-        driver.find_element(By.XPATH,"//input[@id='user']").send_keys("1892LuisAlex")
-        driver.find_element(By.XPATH,"//input[contains(@id,'email')]").send_keys("rdz.alex83@gmail.com")
-        driver.find_element(By.XPATH,"//input[@id='password']").send_keys("Alex1983")
-        driver.find_element(By.XPATH,"//input[contains(@id,'passwordConfirm')]").send_keys("Alex1983")
-        driver.find_element(By.XPATH,"//input[@name='terms']").click()
-        driver.find_element(By.XPATH,"/html/body/div[1]/div/div/div/div[3]/form/div[3]/div/div[1]/div/div[1]/div/span/button").click()
-        time.sleep(5)
-        driver.switch_to.window(driver.window_handles[1])
-        driver.find_element(By.XPATH,"/html/body/div[3]/div[1]/div/div[2]/div[1]/div/div/div/div[2]/div[2]/div/a/span").click()
-        time.sleep(5)
-        driver.switch_to.window(driver.window_handles[2])
-        #driver.find_element(By.XPATH,"/html/body/div[3]/div[2]/div/div/div[2]/div[1]/div").click()
-        time.sleep(10)
-        #driver.find_element(By.XPATH,"")
-
-
-    else:
-        print("No se puede seguir con el registro")
-
 
 
