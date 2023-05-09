@@ -106,7 +106,7 @@ def test_dos():
     f.Click_Mixto("xpath","(//span[contains(.,'ADMIN')])[1]",t)
     allure.attach(driver.get_screenshot_as_png(), name="ADMIN", attachment_type=AttachmentType.PNG)
     f.Click_Mixto("xpath","//span[contains(.,'HOME')]",t)
-    driver.get_screenshot_as_file(f"./(home).png")
+    allure.attach(driver.get_screenshot_as_png(), name="HOME", attachment_type=AttachmentType.PNG)
     time.sleep(5)
 
 
