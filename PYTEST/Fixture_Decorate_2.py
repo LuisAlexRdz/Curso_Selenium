@@ -20,18 +20,18 @@ driver=""
 @pytest.fixture(scope="module")
 def setup_login_uno():
     global driver, f
-    driver.implicitly_wait(20)
     driver = webdriver.Chrome(executable_path='Drivers/chromedriver.exe')
     driver.get("https://admin-demo.nopcommerce.com/login?ReturnUrl=%2Fadmin%2F")
     driver.maximize_window()
+    driver.implicitly_wait(20)
     f = Funciones_Globales(driver)
     f.Texto_Mixto("id", "Email", "admin@yourstore.com", t)
     f.Texto_Mixto("id", "Password", "admin", t)
     f.Click_Mixto("xpath", "//button[@type='submit'][contains(.,'Log in')]", 3)
     print("Entrando al sistema")
-    yield
-    print("Saliendo del login uno")
-    driver.close()
+    ##yield
+    ##print("Saliendo del login uno")
+    ##driver.close()
 
 
 @pytest.fixture(scope="module")
@@ -47,9 +47,9 @@ def setup_login_dos():
     f.Texto_Mixto("id", "password", "Alex1983", t)
     f.Click_Mixto("xpath", "//button[@type='submit'][contains(.,'LOGIN')]", 3)
     print("Entrando al sistema")
-    yield
-    print("Saliendo del login dos")
-    driver.close()
+    ##yield
+    ##print("Saliendo del login dos")
+    ##driver.close()
 
 @pytest.mark.usefixtures("setup_login_uno")
 def test_uno():
@@ -78,6 +78,7 @@ def test_uno():
 
 
 
+
 @pytest.mark.usefixtures("setup_login_dos")
 def test_dos():
     print("Entrando al sistema dos")
@@ -85,9 +86,6 @@ def test_dos():
 
 
 
-
-
-
-
-
-
+def teardown_function():
+    print("Salida del test")
+    driver.close()
