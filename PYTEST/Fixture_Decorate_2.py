@@ -3,7 +3,6 @@
 ###abrir reporte: allure serve .\allurereports\
 
 import time
-
 import allure
 import pytest
 
